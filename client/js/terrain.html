@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- saved from url=(0038)http://localhost:8080/server/view.html -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>three.js webgl - geometry - terrain</title>
+		<title>strat</title>
 		
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<style>
@@ -30,9 +30,27 @@
 		</style>
 	</head>
 	<body>
-
-		<div id="container"><canvas width="1920" height="935" style="width: 1920px; height: 935px;"></canvas><div id="stats" style="width: 80px; opacity: 0.9; cursor: pointer; position: absolute; top: 0px;"><div id="fps" style="padding: 0px 0px 3px 3px; text-align: left; display: block; background: rgb(0, 0, 34);"><div id="fpsText" style="font-family: Helvetica, Arial, sans-serif; font-size: 9px; font-weight: bold; line-height: 15px; color: rgb(0, 255, 255);">46 FPS (1-60)</div><div id="fpsGraph" style="width: 74px; height: 30px; background: rgb(0, 255, 255);"><span id="" style="width: 1px; height: 30px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 30px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 30px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 30px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 30px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 30px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 30px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 30px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 30px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 30px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 30px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12.9px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12.3px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12.6px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12.9px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 15px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12.6px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12.3px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12.3px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12.6px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12.3px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 17.1px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12.3px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12.6px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 18px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12.3px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 29.7px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12.3px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 12px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span><span id="" style="width: 1px; height: 16.2px; float: left; opacity: 0.9; background: rgb(0, 0, 34);"></span></div></div><div id="ms" style="padding: 0px 0px 3px 3px; text-align: left; display: none; background: rgb(0, 34, 0);"><div id="msText" style="font-family: Helvetica, Arial, sans-serif; font-size: 9px; font-weight: bold; line-height: 15px; color: rgb(0, 255, 0);">14 MS (3-1719)</div><div id="msGraph" style="width: 74px; height: 30px; background: rgb(0, 255, 0);"><span id="" style="width: 1px; height: 27.4883px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.4995px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.4357px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.5175px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.5055px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.4792px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.5205px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.4958px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.4928px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.498px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.501px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.495px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.4755px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.5152px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.4883px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.5003px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.4665px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.51px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.5002px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.5047px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.4523px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.5265px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.4717px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.5235px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.3157px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.6765px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.498px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.4957px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.474px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.5175px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.234px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 23.5755px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.8055px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.7867px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.63px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 28.035px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.9px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.501px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.4935px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.495px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.5002px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.4973px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.486px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.5055px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.492px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.4777px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 3.79875px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 19.8307px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 28.809px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 24.9758px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.5047px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.5205px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.3405px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.63px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.4875px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.507px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.4882px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.4987px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.4988px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.4957px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.4867px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.507px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.489px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.4605px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 26.8245px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.4777px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 26.9625px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.963px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.1155px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.699px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.8228px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.5197px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.7882px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span><span id="" style="width: 1px; height: 27.822px; float: left; opacity: 0.9; background: rgb(0, 34, 0);"></span></div></div><div id="mb" style="padding: 0px 0px 3px 3px; text-align: left; display: none; background: rgb(34, 0, 17);"><div id="mbText" style="font-family: Helvetica, Arial, sans-serif; font-size: 9px; font-weight: bold; line-height: 15px; color: rgb(255, 0, 136);">10 MB (10-10)</div><div id="mbGraph" style="width: 74px; height: 30px; background: rgb(255, 0, 136);"><span id="" style="width: 1px; height: 30px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 30px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 30px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 30px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 30px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 30px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 30px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 30px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 30px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 30px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 30px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span><span id="" style="width: 1px; height: 29.6217px; float: left; opacity: 0.9; background: rgb(34, 0, 17);"></span></div></div></div></div>
-		<div id="info"><a href="http://threejs.org/" target="_blank">three.js</a> - webgl terrain raycasting demo</div>
+		<div id="container">
+			<div id="viewDiv" style="position: absolute; top: 10px; width: 100%; text-align: center; display:block">
+				Mode: View
+				<input type="button" onclick="setMode('delete');" value="Delete"/>
+				<input type="button" onclick="save();setMode('view');" value="Save"/>
+				<br />Select an army, or movement position - Left click add, Right click delete
+				<br />Or move around clicking on any other place - Left click turn, Right click move, Middle zoom
+			</div>
+			<div id="addDiv" style="position: absolute; top: 10px; width: 100%; text-align: center; display:none">
+				Mode: Add
+				<input type="button" onclick="setMode('view');" value="View"/>
+				<input type="button" onclick="setMode('delete');" value="Delete"/>
+				<input type="button" onclick="save();setMode('view');" value="Save"/>
+			</div>
+			<div id="deleteDiv" style="position: absolute; top: 10px; width: 100%; text-align: center; display:none">
+				Mode: Delete
+				<input type="button" onclick="setMode('view')" value="View"/>
+				<input type="button" onclick="save();setMode('view')" value="Save"/>
+			</div>
+		</div>
+		<script src="./terrain_files/TerrainUtil.js"></script>
 
 		<script src="./terrain_files/three.min.js"></script>
 
@@ -41,254 +59,141 @@
 		<script src="./terrain_files/ImprovedNoise.js"></script>
 		<script src="./terrain_files/Detector.js"></script>
 		<script src="./terrain_files/stats.min.js"></script>
+		<script src="./terrain_files/Meshes.js"></script>
+		<script src="./terrain_files/Army.js"></script>
+		<script src="./terrain_files/TerrainMap.js"></script>
+		<script src="./terrain_files/WorldScene.js"></script>
+		<script src="./terrain_files/Movement.js"></script>
 		<script src="./terrain_files/map"></script>
 
 		<script>
-			
+		
 			if ( ! Detector.webgl ) {
 
 				Detector.addGetWebGLMessage();
 				document.getElementById( 'container' ).innerHTML = "";
 
 			}
+			
+			var editModeStatus = false;
+						
+			var boxes = [{"current":[10,20], "existing":[[40,50],[30,50]]},
+						 {"current":[0,0], "existing":[]},
+						 {"current":[100,120], "existing":[[140,150],[130,150]]}];
+			
+			var container;
 
-			var container, stats;
+			var worldScene = new WorldScene(7500, 7500);
+			var map = new TerrainMap(10, 4);
+			var armies = [];
+			
+			var selectedObject;
+			var mode = 'view';
 
-			var camera, controls, scene, renderer;
-
-			var mesh, texture;
-
-//			var worldWidth = 256, worldDepth = 256,
-			var worldWidth = jsonMap.sizex, worldDepth = jsonMap.sizey,
-			worldHalfWidth = worldWidth / 2, worldHalfDepth = worldDepth / 2;
-
-			var clock = new THREE.Clock();
-
-			var helper;
-
-			var raycaster = new THREE.Raycaster();
-			var mouse = new THREE.Vector2();
-
+			
 			init();
 			animate();
 
 			function init() {
 
 				container = document.getElementById( 'container' );
+				
+				scene = worldScene.init();
+				map.display();
 
-				camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 20000 );
-
-				scene = new THREE.Scene();
-
-				controls = new THREE.OrbitControls(camera);
-				controls.center.set( 0.0, 100.0, 0.0 );
-				controls.userPanSpeed = 100;
-
-				data = generateHeight( worldWidth, worldDepth );
-
-				controls.center.y = data[ worldHalfWidth + worldHalfDepth * worldWidth ] + 500;
-				camera.position.y =  controls.center.y + 2000;
-				camera.position.x = 2000;
-
-				var geometry = new THREE.PlaneBufferGeometry( 7500, 7500, worldWidth - 1, worldDepth - 1 );
-				geometry.rotateX( - Math.PI / 2 );
-
-				var vertices = geometry.attributes.position.array;
-
-				for ( var i = 0, j = 0, l = vertices.length; i < l; i ++, j += 3 ) {
-
-					vertices[ j + 1 ] = data[ i ] * 10;
-
+				
+				for ( var i = 0; i < boxes.length ; i++ ) {
+					var army = new Army("", boxes[i].current, boxes[i].existing);
+					army.display();
+					armies.push(army);
 				}
 
-				geometry.computeFaceNormals();
+				worldScene.renderFirst();
 
-				texture = new THREE.CanvasTexture( generateTexture( data, worldWidth, worldDepth ) );
-				texture.wrapS = THREE.ClampToEdgeWrapping;
-				texture.wrapT = THREE.ClampToEdgeWrapping;
+				container.addEventListener( 'mousedown', onMouseDown, false );
 
-				mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { map: texture } ) );
-				scene.add( mesh );
-
-				var geometry = new THREE.CylinderGeometry( 0, 20, 100, 3 );
-				geometry.translate( 0, 50, 0 );
-				geometry.rotateX( Math.PI / 2 );
-				helper = new THREE.Mesh( geometry, new THREE.MeshNormalMaterial() );
-				scene.add( helper );
-
-				renderer = new THREE.WebGLRenderer();
-				renderer.setClearColor( 0xbfd1e5 );
-				renderer.setPixelRatio( window.devicePixelRatio );
-				renderer.setSize( window.innerWidth, window.innerHeight );
-
-				container.innerHTML = "";
-
-				container.appendChild( renderer.domElement );
 				container.addEventListener( 'mousemove', onMouseMove, false );
-
-				stats = new Stats();
-				stats.domElement.style.position = 'absolute';
-				stats.domElement.style.top = '0px';
-				container.appendChild( stats.domElement );
-
-				//
 
 				window.addEventListener( 'resize', onWindowResize, false );
 
 			}
 
 			function onWindowResize() {
-
-				camera.aspect = window.innerWidth / window.innerHeight;
-				camera.updateProjectionMatrix();
-
-				renderer.setSize( window.innerWidth, window.innerHeight );
-
+				worldScene.resize();
 			}
-
-			function generateHeight( width, height ) {
-
-				var size = width * height, data = new Uint8Array( size );
-				for ( var i = 0; i < size; i ++ ) {
-					data[ i ] = jsonMap.height[ i ];
-				}
-
-				return data;
-
-			}
-
-			function generateTexture( data, width, height ) {
-
-				var canvas, canvasScaled, context, image, imageData,
-				level, diff, vector3, sun, shade;
-
-				vector3 = new THREE.Vector3( 0, 0, 0 );
-
-				sun = new THREE.Vector3( 1, 1, 1 );
-				sun.normalize();
-
-				canvas = document.createElement( 'canvas' );
-				canvas.width = width;
-				canvas.height = height;
-
-				context = canvas.getContext( '2d' );
-				context.fillStyle = '#000';
-				context.fillRect( 0, 0, width, height );
-
-				image = context.getImageData( 0, 0, canvas.width, canvas.height );
-				imageData = image.data;
-
-				for ( var i = 0, j = 0, l = imageData.length; i < l; i += 4, j ++ ) {
-
-					vector3.x = data[ j - 2 ] - data[ j + 2 ];
-					vector3.y = 2;
-					vector3.z = data[ j - width * 2 ] - data[ j + width * 2 ];
-					vector3.normalize();
-
-					shade = vector3.dot( sun );
-
-// 					imageData[ i ] = ( 96 + shade * 128 ) * ( 0.5 + data[ j ] * 0.007 );
-// 					imageData[ i + 1 ] = ( 32 + shade * 96 ) * ( 0.5 + data[ j ] * 0.007 );
-// 					imageData[ i + 2 ] = ( shade * 96 ) * ( 0.5 + data[ j ] * 0.007 );
-					var red = 0;
-					var green = 0;
-					var blue = 0;
-
-					if (jsonMap.color[i/4]==0 ) {red=0;green=0;blue=0;}
-					if (jsonMap.color[i/4]==1 ) {red=0;green=0;blue=128;}
-					if (jsonMap.color[i/4]==2 ) {red=0;green=0;blue=255;}
-					if (jsonMap.color[i/4]==3 ) {red=0;green=128;blue=255;}
-					if (jsonMap.color[i/4]==4 ) {red=240;green=240;blue=64;}
-					if (jsonMap.color[i/4]==5 ) {red=32;green=160;blue=0;}
-					if (jsonMap.color[i/4]==6 ) {red=160;green=82;blue=45;}
-					if (jsonMap.color[i/4]==7 ) {red=128;green=128;blue=128;}
-					if (jsonMap.color[i/4]==8 ) {red=255;green=255;blue=255;}
-					if (jsonMap.color[i/4]==9 ) {red=255;green=255;blue=255;}
-					
-					red=(red-shade*40) * ( 0.5 + data[ j ] * 0.007 );
-					if (red<0) red=0;
-					if (red>255) red=255;
-					green=(green-shade*40) * ( 0.5 + data[ j ] * 0.007 );
-					if (green<0) green=0;
-					if (green>255) green=255;
-					blue=(blue-shade*40) * ( 0.5 + data[ j ] * 0.007 );
-					if (blue<0) blue=0;
-					if (blue>255) blue=255;
-					imageData[ i ] = red;
-					imageData[ i + 1 ] = green;
-					imageData[ i + 2 ] = blue;
-
-				}
-
-				context.putImageData( image, 0, 0 );
-
-				// Scaled 4x
-
-				canvasScaled = document.createElement( 'canvas' );
-				canvasScaled.width = width * 4;
-				canvasScaled.height = height * 4;
-
-				context = canvasScaled.getContext( '2d' );
-				context.scale( 4, 4 );
-				context.drawImage( canvas, 0, 0 );
-
-				image = context.getImageData( 0, 0, canvasScaled.width, canvasScaled.height );
-				imageData = image.data;
-
-				for ( var i = 0, l = imageData.length; i < l; i += 4 ) {
-
-					var v = ~~ ( Math.random() * 5 );
-
-					imageData[ i ] += v;
-					imageData[ i + 1 ] += v;
-					imageData[ i + 2 ] += v;
-
-				}
-
-				context.putImageData( image, 0, 0 );
-
-				return canvasScaled;
-
-			}
-
-			//
 
 			function animate() {
-
 				requestAnimationFrame( animate );
-
 				render();
-				stats.update();
-
 			}
 
 			function render() {
-
-				controls.update( clock.getDelta() );
-				renderer.render( scene, camera );
-
+				worldScene.render();
 			}
 
-			function onMouseMove( event ) {
+			function onMouseDown( event ) {
+				if (mode === 'view') {
+					var intersect = worldScene.getFirstIntersect(event, armies);
 
-				mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
-				mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
-				raycaster.setFromCamera( mouse, camera );
+					if ( intersect ) {
+						selectedObject = intersect.object.userData.parent;
+						if (event.button === THREE.MOUSE.RIGHT) {
+							selectedObject.remove();
+							selectedObject = undefined;
+						} else {
+							if (selectedObject.next) {
+								selectedObject.next.remove();
+							}
+							setMode('add');
+						}
+					}
+				} else if (mode === 'delete') {
+					var intersect = worldScene.getFirstIntersect(event, armies);
 
-				// See if the ray from the camera into the world hits one of our meshes
-				var intersects = raycaster.intersectObject( mesh );
-
-				// Toggle rotation bool for meshes that we clicked
-				if ( intersects.length > 0 ) {
-
-					helper.position.set( 0, 0, 0 );
-					helper.lookAt( intersects[ 0 ].face.normal );
-
-					helper.position.copy( intersects[ 0 ].point );
-
+					if ( intersect ) {
+						selectedObject = intersect.object.userData.parent;
+						selectedObject.remove();
+						selectedObject = undefined;
+					}
+				} else {
+					var intersect = worldScene.getFirstIntersect(event, [map]);
+					
+					if ( intersect ) {
+						var newPos = map.getMapPosition(intersect.point.x, intersect.point.z);
+						selectedObject.parent.addMovement(newPos);
+					}
 				}
-
+				animate();
 			}
+			
+			function onMouseMove( event ) {
+				worldScene.moveCursor(event);
+			}
+			
+			function setMode( modeToSet ) {
+				document.getElementById('viewDiv').style.display = 'none';
+				document.getElementById('addDiv').style.display = 'none';
+				document.getElementById('deleteDiv').style.display = 'none';
+				if (modeToSet ==='add') {
+					mode = 'add';
+					document.getElementById('addDiv').style.display = 'block';
+				} else if (modeToSet ==='delete') {
+					mode = 'delete';
+					document.getElementById('deleteDiv').style.display = 'block';
+				} else {
+					mode = 'view';
+					document.getElementById('viewDiv').style.display = 'block';
+				}
+			}
+			
+			function editMode( toggle ) {
+				if ( toggle ) {
+					editModeStatus = (editModeStatus === false);
+					document.getElementById('editModeButton').value = 'Edit mode: ' + (editModeStatus? 'ON': 'OFF');
+				}
+			}
+			
+
 
 		</script>
 
