@@ -1,32 +1,23 @@
 package nomad.strat.service.rest
 
-import akka.actor.Actor
-import com.wordnik.swagger.annotations._
-import com.typesafe.scalalogging.LazyLogging
-import spray.httpx.SprayJsonSupport
-import spray.routing._
-import spray.http._
-import MediaTypes._
-
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.util.{Failure, Success}
-import spray.http.StatusCodes._
+import akka.actor.{Actor, ActorRefFactory}
 import akka.util.Timeout
-
-import scala.concurrent.duration._
 import com.gettyimages.spray.swagger._
+import com.typesafe.scalalogging.LazyLogging
+import com.wordnik.swagger.annotations._
 import com.wordnik.swagger.model.ApiInfo
 import nomad.strat.service.persistence.entities.Dummy1
 import nomad.strat.service.utils.{Configuration, PersistenceModule}
+import spray.http.MediaTypes._
+import spray.http._
+import spray.httpx.SprayJsonSupport
+import spray.routing._
 
+import scala.concurrent.duration._
 import scala.reflect.runtime.universe._
 
 class SprayServiceActor(modules: Configuration with PersistenceModule) extends Actor with HttpService with LazyLogging {
-
   // required as implicit value for the HttpService
-  // included from SprayServiceActor
-  def actorRefFactory = context
-
   implicit val timeout = Timeout(5.seconds)
 
   // create table for suppliers if the table didn't exist (should be removed, when the database wasn't h2)
@@ -41,32 +32,40 @@ class SprayServiceActor(modules: Configuration with PersistenceModule) extends A
     override def apiInfo = Some(new ApiInfo("Nomad Start API", "API of our strategic game.", "TOC Url", "strat@nomad.hu", "Apache V2", "http://www.apache.org/licenses/LICENSE-2.0"))
   }
 
-  val firstSteps = new FirstStepHttpService(modules){
-    def actorRefFactory = context
-  }
+  // !!!!! Add new ones here!!!
+  // Actual services of the application:
+  val services = Seq(new FirstStepHttpService(context, modules))
 
+  // included from SprayServiceActor
+  def actorRefFactory = context
 
+  // Unified route:
   def receive = runRoute(
-    firstSteps.Dummy1GetRoute ~
-    firstSteps.Dummy1PostRoute ~
-    swaggerService.routes ~
-    get {
-      pathPrefix("") { pathEndOrSingleSlash {
-        getFromResource("swagger-ui/index.html")
-      }
-      } ~
+    services.map(_.routes).reduce(_ ~ _) ~
+      swaggerService.routes ~
+      get {
+        pathPrefix("") {
+          pathEndOrSingleSlash {
+            getFromResource("swagger-ui/index.html")
+          }
+        } ~
         getFromResourceDirectory("swagger-ui")
-    })
+      })
 }
 
+trait ServiceWithRoutes {
+  def routes: Route
+}
 
 @Api(value = "/dummyEndPoint", description = "Just a sample thingy")
-abstract class FirstStepHttpService(modules: Configuration with PersistenceModule) extends HttpService {
+class FirstStepHttpService(override val actorRefFactory: ActorRefFactory, modules: Configuration with PersistenceModule) extends HttpService with ServiceWithRoutes {
 
   import JsonProtocol._
   import SprayJsonSupport._
 
   implicit val timeout = Timeout(5.seconds)
+
+  override def routes = Dummy1GetRoute ~ Dummy1PostRoute
 
   @ApiOperation(httpMethod = "GET", response = classOf[Dummy1], value = "Returns a supplier based on ID")
   @ApiImplicitParams(Array(
@@ -75,23 +74,23 @@ abstract class FirstStepHttpService(modules: Configuration with PersistenceModul
   @ApiResponses(Array(
     new ApiResponse(code = 200, message = "Ok")))
   def Dummy1GetRoute = path("dummyEndPoint" / IntNumber) {
-    (dummyId)      =>
-    get {
-      respondWithMediaType(`application/json`) {
-        complete(Dummy1(dummyId,s"Name$dummyId"))
+    (dummyId) =>
+      get {
+        respondWithMediaType(`application/json`) {
+          complete(Dummy1(dummyId, s"Name$dummyId"))
 
-      /*
-        This would be the code if we were getting it from DB.
-        onComplete((modules.dummyDal.findById(supId)).mapTo[Option[Dummy1]]) {
-          case Success(dummyOpt) => dummyOpt match {
-            case Some(dummy) => complete(dummy)
-            case None => complete(NotFound,s"The dummy with id $dummyId doesn't exist :-)")
-          }
-          case Failure(ex) => complete(InternalServerError, s"An error occurred: ${ex.getMessage}")
+          /*
+            This would be the code if we were getting it from DB.
+            onComplete((modules.dummyDal.findById(supId)).mapTo[Option[Dummy1]]) {
+              case Success(dummyOpt) => dummyOpt match {
+                case Some(dummy) => complete(dummy)
+                case None => complete(NotFound,s"The dummy with id $dummyId doesn't exist :-)")
+              }
+              case Failure(ex) => complete(InternalServerError, s"An error occurred: ${ex.getMessage}")
+            }
+            */
         }
-        */
       }
-    }
   }
 
   @ApiOperation(value = "Add Dummy1", nickname = "addDummy1", httpMethod = "POST", consumes = "application/json", produces = "text/plain; charset=UTF-8")
@@ -102,7 +101,7 @@ abstract class FirstStepHttpService(modules: Configuration with PersistenceModul
     new ApiResponse(code = 400, message = "Bad Request"),
     new ApiResponse(code = 201, message = "Entity Created")
   ))
-  def Dummy1PostRoute = path("dummyEndPoint"){
+  def Dummy1PostRoute = path("dummyEndPoint") {
     post {
       complete(StatusCodes.Created)
       /*
@@ -112,8 +111,8 @@ abstract class FirstStepHttpService(modules: Configuration with PersistenceModul
         case Failure(ex) => complete(InternalServerError, s"An error occurred: ${ex.getMessage}")
       }
       */
-      }
     }
   }
+}
 
 
