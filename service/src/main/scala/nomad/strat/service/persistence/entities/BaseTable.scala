@@ -1,4 +1,4 @@
-package nomad.start.service.persistence.entities
+package nomad.strat.service.persistence.entities
 
 import slick.driver.H2Driver.api._
 import slick.lifted.Tag

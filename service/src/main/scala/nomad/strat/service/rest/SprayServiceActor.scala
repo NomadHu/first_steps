@@ -1,4 +1,4 @@
-package nomad.start.service.rest
+package nomad.strat.service.rest
 
 import akka.actor.Actor
 import com.wordnik.swagger.annotations._
@@ -16,8 +16,8 @@ import akka.util.Timeout
 import scala.concurrent.duration._
 import com.gettyimages.spray.swagger._
 import com.wordnik.swagger.model.ApiInfo
-import nomad.start.service.persistence.entities.Dummy1
-import nomad.start.service.utils.{Configuration, PersistenceModule}
+import nomad.strat.service.persistence.entities.Dummy1
+import nomad.strat.service.utils.{Configuration, PersistenceModule}
 
 import scala.reflect.runtime.universe._
 

@@ -1,4 +1,4 @@
-package nomad.start.service.utils
+package nomad.strat.service.utils
 
 import akka.actor.{ActorPath, ActorSelection, Props, ActorRef}
 //import persistence.dal._
