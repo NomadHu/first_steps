@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit
 import slick.backend.DatabaseConfig
 import slick.jdbc.meta.MTable
 import slick.codegen.SourceCodeGenerator
-import slick.driver.MySQLDriver
+import slick.driver.PostgresDriver
 
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, ExecutionContext, Future}
@@ -16,11 +16,11 @@ object SlickCodeGen extends App {
   val pkg = "nomad.strat.service.persistence.entities"
 
   implicit val ec = ExecutionContext.global
-  val slickDriver = "slick.driver.MySQLDriver"
-  val dbConfig: DatabaseConfig[MySQLDriver] = DatabaseConfig.forConfig("mysql")
+  val slickDriver = "slick.driver."
+  val dbConfig: DatabaseConfig[PostgresDriver] = DatabaseConfig.forConfig("pgsql")
   val db = dbConfig.db
 
-  val dbio = MySQLDriver.createModel(Some(MTable.getTables(None, None, None, Some(Seq("TABLE", "VIEW")))))
+  val dbio = PostgresDriver.createModel(Some(MTable.getTables(None, None, None, Some(Seq("TABLE", "VIEW")))))
 
   val model = db.run(dbio)
   val future : Future[SourceCodeGenerator] = model.map(model => new SourceCodeGenerator(model))
