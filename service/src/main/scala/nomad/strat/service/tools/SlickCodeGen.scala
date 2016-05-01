@@ -16,7 +16,7 @@ object SlickCodeGen extends App {
   val pkg = "nomad.strat.service.persistence.entities"
 
   implicit val ec = ExecutionContext.global
-  val slickDriver = "slick.driver."
+  val slickDriver = "slick.driver.PostgresDriver"
   val dbConfig: DatabaseConfig[PostgresDriver] = DatabaseConfig.forConfig("pgsql")
   val db = dbConfig.db
 
