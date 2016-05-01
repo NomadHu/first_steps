@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<!-- saved from url=(0038)http://localhost:8080/server/view.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>strat</title>
+		
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				color: #61443e;
+				font-family:Monospace;
+				font-size:13px;
+				text-align:center;
+
+				background-color: #bfd1e5;
+				margin: 0px;
+				overflow: hidden;
+			}
+
+			#info {
+				position: absolute;
+				top: 0px; width: 100%;
+				padding: 5px;
+			}
+
+			a {
+
+				color: #a06851;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			<div id="viewDiv" style="position: absolute; top: 10px; width: 100%; text-align: center; display:block">
+				Mode: View
+				<input type="button" onclick="setMode('delete');" value="Delete"/>
+				<input type="button" onclick="save();setMode('view');" value="Save"/>
+				<br />Select an army, or movement position - Left click add, Right click delete
+				<br />Or move around clicking on any other place - Left click turn, Right click move, Middle zoom
+			</div>
+			<div id="addDiv" style="position: absolute; top: 10px; width: 100%; text-align: center; display:none">
+				Mode: Add
+				<input type="button" onclick="setMode('view');" value="View"/>
+				<input type="button" onclick="setMode('delete');" value="Delete"/>
+				<input type="button" onclick="save();setMode('view');" value="Save"/>
+			</div>
+			<div id="deleteDiv" style="position: absolute; top: 10px; width: 100%; text-align: center; display:none">
+				Mode: Delete
+				<input type="button" onclick="setMode('view')" value="View"/>
+				<input type="button" onclick="save();setMode('view')" value="Save"/>
+			</div>
+		</div>
+		<script src="./terrain_files/TerrainUtil.js"></script>
+
+		<script src="./terrain_files/three.min.js"></script>
+
+		<script src="./terrain_files/OrbitControls.js"></script>
+
+		<script src="./terrain_files/ImprovedNoise.js"></script>
+		<script src="./terrain_files/Detector.js"></script>
+		<script src="./terrain_files/stats.min.js"></script>
+		<script src="./terrain_files/Meshes.js"></script>
+		<script src="./terrain_files/Army.js"></script>
+		<script src="./terrain_files/TerrainMap.js"></script>
+		<script src="./terrain_files/WorldScene.js"></script>
+		<script src="./terrain_files/Movement.js"></script>
+		<script src="./terrain_files/map"></script>
+
+		<script>
+		
+			if ( ! Detector.webgl ) {
+
+				Detector.addGetWebGLMessage();
+				document.getElementById( 'container' ).innerHTML = "";
+
+			}
+			
+			var editModeStatus = false;
+						
+			var boxes = [{"current":[10,20], "existing":[[40,50],[30,50]]},
+						 {"current":[0,0], "existing":[]},
+						 {"current":[100,120], "existing":[[140,150],[130,150]]}];
+			
+			var container;
+
+			var worldScene = new WorldScene(7500, 7500);
+			var map = new TerrainMap(10, 4);
+			var armies = [];
+			
+			var selectedObject;
+			var mode = 'view';
+
+			
+			init();
+			animate();
+
+			function init() {
+
+				container = document.getElementById( 'container' );
+				
+				scene = worldScene.init();
+				map.display();
+
+				
+				for ( var i = 0; i < boxes.length ; i++ ) {
+					var army = new Army("", boxes[i].current, boxes[i].existing);
+					army.display();
+					armies.push(army);
+				}
+
+				worldScene.renderFirst();
+
+				container.addEventListener( 'mousedown', onMouseDown, false );
+
+				container.addEventListener( 'mousemove', onMouseMove, false );
+
+				window.addEventListener( 'resize', onWindowResize, false );
+
+			}
+
+			function onWindowResize() {
+				worldScene.resize();
+			}
+
+			function animate() {
+				requestAnimationFrame( animate );
+				render();
+			}
+
+			function render() {
+				worldScene.render();
+			}
+
+			function onMouseDown( event ) {
+				if (mode === 'view') {
+					var intersect = worldScene.getFirstIntersect(event, armies);
+
+					if ( intersect ) {
+						selectedObject = intersect.object.userData.parent;
+						if (event.button === THREE.MOUSE.RIGHT) {
+							selectedObject.remove();
+							selectedObject = undefined;
+						} else {
+							if (selectedObject.next) {
+								selectedObject.next.remove();
+							}
+							setMode('add');
+						}
+					}
+				} else if (mode === 'delete') {
+					var intersect = worldScene.getFirstIntersect(event, armies);
+
+					if ( intersect ) {
+						selectedObject = intersect.object.userData.parent;
+						selectedObject.remove();
+						selectedObject = undefined;
+					}
+				} else {
+					var intersect = worldScene.getFirstIntersect(event, [map]);
+					
+					if ( intersect ) {
+						var newPos = map.getMapPosition(intersect.point.x, intersect.point.z);
+						selectedObject.parent.addMovement(newPos);
+					}
+				}
+				animate();
+			}
+			
+			function onMouseMove( event ) {
+				worldScene.moveCursor(event);
+			}
+			
+			function setMode( modeToSet ) {
+				document.getElementById('viewDiv').style.display = 'none';
+				document.getElementById('addDiv').style.display = 'none';
+				document.getElementById('deleteDiv').style.display = 'none';
+				if (modeToSet ==='add') {
+					mode = 'add';
+					document.getElementById('addDiv').style.display = 'block';
+				} else if (modeToSet ==='delete') {
+					mode = 'delete';
+					document.getElementById('deleteDiv').style.display = 'block';
+				} else {
+					mode = 'view';
+					document.getElementById('viewDiv').style.display = 'block';
+				}
+			}
+			
+			function editMode( toggle ) {
+				if ( toggle ) {
+					editModeStatus = (editModeStatus === false);
+					document.getElementById('editModeButton').value = 'Edit mode: ' + (editModeStatus? 'ON': 'OFF');
+				}
+			}
+			
+
+
+		</script>
+
+	
+
+</body></html>
