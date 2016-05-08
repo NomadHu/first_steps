@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="strat">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Strat</title>
+
+    <!-- Bootstrap -->
+    <link href="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp.css" rel="stylesheet"/>
+    <link href="node_modules/angular-ui-bootstrap/dist/bootstrap.css" rel="stylesheet"/>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	
+	<script src="node_modules/angular/angular.js"></script>
+	<script src="node_modules/angular-resource/angular-resource.js"></script>
+	<script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+	<script src="node_modules/three/three.js"></script>
+	
+	<script src="js/app.js"></script>
+	<script src="js/services/armyService.js"></script>
+	<script src="js/services/mapService.js"></script>
+	<script src="js/services/movementService.js"></script>
+	<script src="js/services/armyStore.js"></script>
+	<script src="js/services/mapStore.js"></script>
+	<script src="js/services/movementStore.js"></script>
+	<script src="js/services/cursorState.js"></script>
+	<script src="js/services/actionbarState.js"></script>
+
+	<script src="js/menu/menuCtrl.js"></script>
+	<script src="js/menu/menuDirective.js"></script>
+	<script src="js/webgl/webglCtrl.js"></script>
+	<script src="js/webgl/webglDirective.js"></script>
+	
+	<script src="js/model/Army.js"></script>
+	<script src="js/model/Movement.js"></script>
+	<script src="js/model/Map.js"></script>
+	<script src="js/model/MapPosition.js"></script>
+
+	<script src="js/threeobjects/StratScene.js"></script>
+	<script src="js/threeobjects/OrbitControls.js"></script>
+	<script src="js/threeobjects/TerrainMesh.js"></script>
+	<script src="js/threeobjects/MovementMesh.js"></script>
+	<script src="js/threeobjects/ArmyMesh.js"></script>
+	<script src="js/threeobjects/Meshes.js"></script>
+	<script src="js/threeobjects/TerrainUtil.js"></script>
+
+	<!--
+	<script src="angular/StratApp.js"></script>
+	<script src="angular/MenuCtrl.js"></script>
+	<script src="angular/WebGLCtrl.js"></script>
+	<script src="angular/WebGLView.js"></script>
+	<script src="angular/util.js"></script>
+	<script src="three/StratScene.js"></script>
+	<script src="three/OrbitControls.js"></script>
+	<script src="three/TerrainMesh.js"></script>
+	<script src="three/MovementMesh.js"></script>
+	<script src="three/ArmyMesh.js"></script>
+	<script src="three/Meshes.js"></script>
+	<script src="three/TerrainUtil.js"></script>
+	<script src="model/Army.js"></script>
+	<script src="model/Movement.js"></script>
+	<script src="model/MapPosition.js"></script>
+	-->
+  </head>
+  <body>
+<menu-directive></menu-directive>
+	<div ng-controller="menuCtrl as vm">
+		<br/>Map:{{vm.map}}
+		<br/>Movements: {{vm.movements}}
+		<br/>Armies: {{vm.armies}}
+		<br/>Actionbar: {{vm.actionbarState}}
+		<br/>Selected: {{vm.cursorState.selectedObject}}
+		<br/>Hover: {{vm.cursorState.hoverObject}}
+<!--		kkk
+		<a ng-href='#' ng-click='vm.check()' >click me</a>
+		jjj-->
+	<br/>	
+	</div>
+	<div ng-controller="webglCtrl as vm">
+	
+<div webgl-directive id="webglContainer" width="400" height="400" fill-container="true" view-width="7500" view-depth="7500" height-stretch="10" width-stretch="4"></div>
+	</div>		
+  <!--
+	<div ng-controller="MenuCtrl">
+	<form>
+    <div class="btn-group">
+        <label class="btn btn-primary" ng-model="mode" uib-btn-radio="'View'">View</label>
+        <label class="btn btn-primary" ng-model="mode" uib-btn-radio="'Add'">Add</label>
+        <label class="btn btn-primary" ng-model="mode" uib-btn-radio="'Delete'">Delete</label>
+    </div>
+    <div class="btn-group">
+        <label class="btn btn-primary" ng-model="terrainColor" uib-btn-radio="'Height'">Height</label>
+        <label class="btn btn-primary" ng-model="terrainColor" uib-btn-radio="'Tax'">Tax</label>
+        <label class="btn btn-primary" ng-model="terrainColor" uib-btn-radio="'Population'">Population</label>
+    </div>
+    <div class="btn-group">
+        <label class="btn btn-primary" ng-model="markers.armies" uib-btn-checkbox>Armies</label>
+        <label class="btn btn-primary" ng-model="markers.movements" uib-btn-checkbox>Movements</label>
+        <label class="btn btn-primary" ng-model="markers.buildings" uib-btn-checkbox>Buildings</label>
+    </div>	
+	
+First Name: <input type="text" ng-model="armies[0].pos.x">
+{{mode}}
+</form>
+
+<h1>You entered: {{armies[0].movements[0].pos.x}}</h1>
+
+	  <ul>
+		<li ng-repeat="army in armies">
+		  <span>{{army.pos}}</span>
+		  <p>{{army.data}}</p>
+		  <ul>
+		  <li ng-repeat="movement in army.movements">
+			<p>{{movement.pos}}</p>
+			</li>
+			</ul>
+		</li>
+	  </ul>
+	  {{map.sizex}}
+	<div ng-controller="WebGLCtrl">
+	{{mode}} {{terrainColor}} {{markersToDisplay}} tt{{typesToCheck}}tt jj{{popupPositionX}}jj
+        <div  id="webglContainer" web-gl-view width="400" height="400" fill-container="true" view-width="7500" view-depth="7500" height-stretch="10" width-stretch="4"
+			  map='map' armies='armies' selected-object='selectedObject' selection-mode='selectionMode' hover-object='hoverObject' types-to-check='typesToCheck'
+			  movement-popup-open='movementPopupOpen' building-popup-open='buildingPopupOpen' army-popup-open='armyPopupOpen' popup-position-x='popupPositionX' popup-position-y='popupPositionY'>
+		</div>
+			<button uib-popover-template="'angular/templates/armypopup.html'" popover-title="Army" popover-trigger="none" popover-is-open="armyPopupOpen" 
+			style="position: relative;visibility: hid1den; width:0;height:0;" ng-style="{left:popupPositionX-11+'px', top:popupPositionY+'px'}" popover-placement="top"></button>
+			<button uib-popover-template="'angular/templates/movementpopup.html'" popover-title="Movement" popover-trigger="none" popover-is-open="movementPopupOpen" 
+			style="position: relative;visibility: hid1den; width:0;height:0;" ng-style="{left:popupPositionX-32+'px', top:popupPositionY+'px'}" popover-placement="top"></button>
+			<button uib-popover-template="'angular/templates/buildingpopup.html'" popover-title="Building" popover-trigger="none" popover-is-open="buildingPopupOpen" 
+			style="position: relative;visibility: hid1den; width:0;height:0;" ng-style="{left:popupPositionX-53+'px', top:popupPositionY+'px'}" popover-placement="top"></button>
+	</div>
+	</div>	
+	-->
+  </body>
+</html>

@@ -1,0 +1,46 @@
+[
+	{
+		"armyId":1,
+		"movements": 
+		[
+			{
+				"id": 1,
+				"to": [40,50],
+				"data":
+				{
+					"type": "normal"
+				}
+			},
+			{
+				"id": 2,
+				"to": [30,50],
+				"data":
+				{
+					"type": "normal"
+				}
+			}
+		]
+	},
+	{
+		"armyId":3,
+		"movements": 
+		[
+			{
+				"id": 1,
+				"to": [140,150],
+				"data":
+				{
+					"type": "fast"
+				}
+			},
+			{
+				"id": 2,
+				"to": [130,150],
+				"data":
+				{
+					"type": "normal"
+				}
+			}
+		]
+	}
+]

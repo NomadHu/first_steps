@@ -1,0 +1,1 @@
+angular.module('strat', ['ui.bootstrap','ngResource']);
