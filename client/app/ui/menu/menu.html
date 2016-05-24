@@ -1,0 +1,15 @@
+<div class="btn-group">
+  <label class="btn btn-primary" [ngModel]="uiModeType[mode]" (ngModelChange)="setModeEvent($event)" btnRadio="View">View</label>
+  <label class="btn btn-primary" [ngModel]="uiModeType[mode]" (ngModelChange)="setModeEvent($event)" btnRadio="Add">Add</label>
+  <label class="btn btn-primary" [ngModel]="uiModeType[mode]" (ngModelChange)="setModeEvent($event)" btnRadio="Delete">Delete</label>
+</div>
+<div class="btn-group">
+  <label class="btn btn-primary" [ngModel]="terrainTextureType[terrainTexture]" (ngModelChange)="setTextureEvent($event)" btnRadio="Height">Height</label>
+  <label class="btn btn-primary" [ngModel]="terrainTextureType[terrainTexture]" (ngModelChange)="setTextureEvent($event)" btnRadio="Tax">Tax</label>
+  <label class="btn btn-primary" [ngModel]="terrainTextureType[terrainTexture]" (ngModelChange)="setTextureEvent($event)" btnRadio="Population">Population</label>
+</div>
+<div class="btn-group">
+  <label class="btn btn-primary" [ngModel]="isMarked('Armies')" (ngModelChange)="toggleMarkerEvent('Armies')" btnCheckbox>Armies</label>
+  <label class="btn btn-primary" [ngModel]="isMarked('Movements')" (ngModelChange)="toggleMarkerEvent('Movements')" btnCheckbox>Movements</label>
+  <label class="btn btn-primary" [ngModel]="isMarked('Buildings')" (ngModelChange)="toggleMarkerEvent('Buildings')" btnCheckbox>Buildings</label>
+</div>

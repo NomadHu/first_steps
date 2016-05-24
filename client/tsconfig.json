@@ -1,0 +1,55 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": false,
+    "noImplicitAny": false
+  },
+  "filesGlob": [
+    "**/*.ts",
+    "**/*.tsx",
+    "!node_modules/**",
+    "!typings/main/**",
+    "!typings/main.d.ts"
+  ],
+  "files": [
+    "app/app.component.ts",
+    "app/main.ts",
+    "app/model/color-code.ts",
+    "app/model/terrain-texture.ts",
+    "app/model/terrain.ts",
+    "app/state/app.action.ts",
+    "app/state/app.state-factory.ts",
+    "app/state/app.state.ts",
+    "app/state/army/army-action.ts",
+    "app/state/army/army-reducer.ts",
+    "app/state/army/army-state.ts",
+    "app/state/building/building-state.ts",
+    "app/state/terrain/terrain-action.ts",
+    "app/state/terrain/terrain-reducer.ts",
+    "app/state/terrain/terrain-state.ts",
+    "app/state/tokens.ts",
+    "app/state/ui/ui-action.ts",
+    "app/state/ui/ui-reducer.ts",
+    "app/state/ui/ui-state.ts",
+    "app/store/terrain.service.ts",
+    "app/ui/menu/menu.ts",
+    "app/ui/web-gl-editor/map-mesh.ts",
+    "app/ui/web-gl-editor/mesh-factory.ts",
+    "app/ui/web-gl-editor/render-service.ts",
+    "app/ui/web-gl-editor/web-gl-editor.ts",
+    "typings/browser.d.ts",
+    "typings/browser/ambient/es6-shim/index.d.ts",
+    "typings/browser/ambient/jasmine/index.d.ts",
+    "typings/browser/ambient/node/index.d.ts",
+    "typings/browser/ambient/three-orbitcontrols/index.d.ts",
+    "typings/browser/ambient/three/index.d.ts"
+  ],
+  "atom": {
+    "rewriteTsconfig": true
+  }
+}
