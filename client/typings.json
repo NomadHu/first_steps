@@ -1,0 +1,9 @@
+{
+  "ambientDependencies": {
+    "es6-shim": "registry:dt/es6-shim#0.31.2+20160317120654",
+    "jasmine": "registry:dt/jasmine#2.2.0+20160412134438",
+    "node": "registry:dt/node#4.0.0+20160509154515",
+    "three": "github:DefinitelyTyped/DefinitelyTyped/threejs/three.d.ts#74c1ffbba4e8f33765ccb1b9b1eaa0eacabe6e58",
+    "three-orbitcontrols": "github:DefinitelyTyped/DefinitelyTyped/threejs/three-orbitcontrols.d.ts#7de6c3dd94feaeb21f20054b9f30d5dabc5efabd"
+  }
+}
