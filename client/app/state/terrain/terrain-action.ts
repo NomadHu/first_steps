@@ -1,5 +1,4 @@
-import {Terrain} from '../../model/terrain';
-import {TerrainTexture} from '../../model/terrain-texture';
+import {Terrain, TerrainTexture} from './terrain-state';
 
 export class LoadTerrain {
   constructor(public terrain:Terrain,public texture:TerrainTexture) {

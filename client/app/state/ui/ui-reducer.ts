@@ -22,6 +22,6 @@ export function calculateUiState(state: UiState, action:Action) {
       return new UiState({uiMode:state.uiMode, terrianTextureType:state.terrianTextureType, markers: state.markers.delete(index)});
     }
   } else {
-        return state;
-    }
+    return state;
+  }
 }

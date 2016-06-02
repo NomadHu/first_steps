@@ -1,14 +1,72 @@
-import {PlaneBufferGeometry, CanvasTexture, ClampToEdgeWrapping, Mesh, MeshBasicMaterial, Vector3} from 'three';
-import {Terrain} from '../../model/terrain'
-import {TerrainTexture} from '../../model/terrain-texture'
-import {ColorCode} from '../../model/color-code'
-import {MapMesh} from './map-mesh'
+import {MeshLambertMaterial, PlaneBufferGeometry, CanvasTexture, ClampToEdgeWrapping, Mesh, MeshBasicMaterial, Vector3, BoxGeometry, CubicBezierCurve3, Geometry, ArrowHelper, Line, LineBasicMaterial, SphereGeometry, BufferGeometry} from 'three';
+import {Terrain, TerrainTexture, ColorCode} from '../../state/terrain/terrain-state'
+import {Army, Movement} from '../../state/army/army-state'
 
 export class MeshFactory {
-  public createTerrainMesh(terrain:Terrain, heightStretch:number, widthStretch:number, viewWidth:number, viewDepth:number):MapMesh {
+  private currentMesh:Mesh = undefined;
+  private movementMesh:Mesh = undefined;
+
+  constructor() {
+    let currentGeo = new BoxGeometry( 50, 50, 50 );currentGeo.center();
+    let currentMaterial = new MeshBasicMaterial( { color: 0x000000, opacity: 0.0, transparent: false } );
+    this.currentMesh = new Mesh( currentGeo, currentMaterial );
+
+    let movementGeo = new SphereGeometry( 25, 32, 32 );movementGeo.center();
+    let movementMaterial = new MeshBasicMaterial( { color: 0x00ff00, opacity: 0.0, transparent: false } );
+    this.movementMesh = new Mesh( movementGeo, movementMaterial );
+  }
+
+  public createArmyMesh(army:Army, position:Vector3):Mesh {
+    var mesh:Mesh = this.currentMesh.clone();
+  	mesh.position.set(position.x,position.y,position.z);
+  	mesh.userData.parent = army;
+    return mesh;
+  }
+
+  public createMovementMesh(movement:Movement, from:Vector3, to:Vector3):Mesh {
+    /*
+    var meshes:Mesh[] = [];
+    var targetMesh:Mesh = this.movementMesh.clone();
+    targetMesh.position.set(to.x,to.y,to.z);
+    meshes.push(targetMesh);
+*/
+    let curve = new CubicBezierCurve3(
+      new Vector3(from.x,from.y+25,from.z),
+			new Vector3(from.x,from.y+175,from.z),
+			new Vector3(to.x,to.y+175,to.z),
+			new Vector3(to.x,to.y+25,to.z)
+    );
+    let curveGeometry = new Geometry();
+    curveGeometry.vertices = curve.getPoints( 64 );
+    let lineMaterial = new LineBasicMaterial( { color : 0x00ff00, linewidth : 3 } );;
+    let curveObject:any = new Line( curveGeometry, lineMaterial );
+    /*
+    meshes.push(curveObject);
+
+    let arrowColor = 0x00ff00;
+
+    let arrowFrom = curveGeometry.vertices[56];
+    let arrowTo = curveGeometry.vertices[64];
+    let direction = arrowTo.clone().sub(arrowFrom);
+    let length = direction.length();
+    let arrowObject = new ArrowHelper(direction.normalize(), from, length, arrowColor, 60, 30 );
+
+    var movementGeometry = this.mergeMeshes(meshes);
+    let movementMaterial = new MeshBasicMaterial( { color: 0x00ff00, opacity: 0.0, transparent: false } );
+    var mesh = new Mesh( movementGeometry, movementMaterial );
+  	mesh.userData.parent = movement;
+    */
+    return curveObject;
+  }
+
+
+  public createTerrainMesh(terrain:Terrain, heightStretch:number, widthStretch:number, viewWidth:number, viewDepth:number):Mesh {
     var geometry = this.createTerrainGeometry(terrain, heightStretch, widthStretch, viewWidth, viewWidth);
     var myTexture = this.createTerrainTexture(terrain, undefined, widthStretch);
-    return this.createTerrainMeshInner(terrain, geometry, new MeshBasicMaterial( { map: myTexture }/*{ color: 0x000000, opacity: 0.0, transparent: false }*/ ));
+    var mesh = new Mesh( geometry, new MeshBasicMaterial( { map: myTexture } ));
+    mesh.userData.parent = terrain;
+
+    return mesh;
   }
 
   private createTerrainGeometry(terrain:Terrain, heightStretch:number, widthStretch:number, viewWidth:number, viewDepth:number):PlaneBufferGeometry {
@@ -24,17 +82,6 @@ export class MeshFactory {
   	result.computeFaceNormals();
 
     return result;
-  }
-
-  private createTerrainMeshInner(terrain:Terrain, geometry:PlaneBufferGeometry, material: MeshBasicMaterial):MapMesh {
-  	var mesh = new Mesh( geometry, material );
-    mesh.userData.parent = terrain;
-
-    var result = new MapMesh();
-    result.meshToDisplay = mesh;
-    result.meshesToIntersect = [mesh];
-    result.parent = terrain;
-  	return result;
   }
 
   public createTerrainTexture (terrain:Terrain, texture:TerrainTexture, widthStretch:number):CanvasTexture {
@@ -134,5 +181,17 @@ export class MeshFactory {
       }
       material.dispose();
     }
+  }
+
+  private mergeMeshes(meshes:Mesh[]):Geometry {
+    var combined = new Geometry();
+
+    for (var i = 0; i < meshes.length; i++) {
+      meshes[i].updateMatrix();
+      let geometry:any = meshes[i].geometry;
+      combined.merge(geometry, meshes[i].matrix);
+    }
+
+    return combined;
   }
 }

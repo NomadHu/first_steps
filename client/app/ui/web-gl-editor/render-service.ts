@@ -1,8 +1,8 @@
-import {WebGLRenderer, Scene, PerspectiveCamera, Mesh, SphereGeometry, MeshBasicMaterial, AmbientLight, PointLight, Clock, Renderer, Raycaster, Vector2, OrbitControls} from 'three';
-import {Terrain} from '../../model/terrain'
-import {TerrainTexture} from '../../model/terrain-texture'
-import {MapMesh} from './map-mesh';
-import {MeshFactory} from './mesh-factory';
+import {WebGLRenderer, Scene, PerspectiveCamera, Mesh, SphereGeometry, MeshBasicMaterial, AmbientLight, PointLight, Clock, Renderer, Raycaster, Vector2, Vector3, OrbitControls} from 'three';
+import {Terrain, TerrainTexture} from '../../state/terrain/terrain-state'
+import {Army, Movement, MapPosition} from '../../state/army/army-state'
+import {MeshFactory} from './mesh-factory'
+import {List, OrderedMap} from 'immutable'
 
 export class RenderService {
   private container: HTMLElement;
@@ -21,10 +21,13 @@ export class RenderService {
 
   private terrain:Terrain;
   private terrainTexture:TerrainTexture;
+  private armies:OrderedMap<number, Army>;
+  private movements:OrderedMap<number, List<Movement>>;
   private meshFactory: MeshFactory;
-  private terrainMesh: MapMesh;
-	private terrainMeshesToIntersect: Mesh[];
 
+  private terrainMesh: Mesh;
+  private armyMeshes: Mesh[];
+  private movementMeshes: Mesh[];
 
   public init(container: HTMLElement, meshFactory: MeshFactory, heightStretch:number, widthStretch:number, viewWidth:number, viewDepth:number) {
     this.container = container;
@@ -101,17 +104,17 @@ export class RenderService {
   	}
     this.terrain = terrain;
     if (this.terrainMesh) {
-      this.scene.remove(this.terrainMesh.meshToDisplay);
-      this.meshFactory.disposeMesh(this.terrainMesh.meshToDisplay);
+      this.scene.remove(this.terrainMesh);
+      this.meshFactory.disposeMesh(this.terrainMesh);
     }
 
     this.terrainMesh = this.meshFactory.createTerrainMesh(this.terrain, this.heightStretch, this.widthStretch, this.viewWidth, this.viewDepth);
-    this.terrainMeshesToIntersect = [];
-    this.terrainMeshesToIntersect = this.terrainMeshesToIntersect.concat(this.terrainMesh.meshesToIntersect);
-    this.scene.add(this.terrainMesh.meshToDisplay);
+    this.scene.add(this.terrainMesh);
     if (this.terrainTexture&&this.terrainTexture.initialized) {
       this.updateTerrainTexture(this.terrainTexture);
     }
+    this.updateArmies(this.armies);
+    this.updateMovements(this.movements);
   }
 
   public updateTerrainTexture(texture:TerrainTexture) {
@@ -121,7 +124,7 @@ export class RenderService {
     this.terrainTexture = texture;
     if (this.terrainMesh) {
       var oldMap = undefined;
-      var material:any = this.terrainMesh.meshToDisplay.material;
+      var material:any = this.terrainMesh.material;
       if (material.map) {
         oldMap = material.map;
       }
@@ -134,4 +137,61 @@ export class RenderService {
       }
     }
   }
+
+  public updateArmies(armies:OrderedMap<number, Army>) {
+    if (!armies||!armies.forEach) {
+  		return;
+  	}
+    this.armies = armies;
+    if (!this.terrain||!this.terrain.initialized) {
+      return;
+    }
+    if (this.armyMeshes) {
+      this.armyMeshes.forEach((armyMesh) => {
+        this.scene.remove(armyMesh);
+        this.meshFactory.disposeMesh(armyMesh);
+      });
+    }
+
+    this.armyMeshes = [];
+    this.armies.forEach((army) => {
+      let armyMesh:Mesh = this.meshFactory.createArmyMesh(army, this.getDisplayPosition(army.pos));
+      this.armyMeshes.push(armyMesh);
+      this.scene.add(armyMesh);
+    })
+  }
+
+  public updateMovements(movements:OrderedMap<number, List<Movement>>) {
+    if (!movements||!movements.forEach) {
+  		return;
+  	}
+    this.movements = movements;
+    if (!this.terrain||!this.terrain.initialized) {
+      return;
+    }
+    if (this.movementMeshes) {
+      this.movementMeshes.forEach((movementMesh) => {
+        this.scene.remove(movementMesh);
+        this.meshFactory.disposeMesh(movementMesh);
+      });
+    }
+
+    this.movementMeshes = [];
+    this.movements.forEach((movementList) => {
+      movementList.forEach((movement) => {
+        let movementMesh:Mesh = this.meshFactory.createMovementMesh(movement, this.getDisplayPosition(movement.from), this.getDisplayPosition(movement.to));
+        this.movementMeshes.push(movementMesh);
+        this.scene.add(movementMesh);
+      })
+    })
+  }
+
+  private getDisplayPosition(pos:MapPosition):Vector3 {
+    return new Vector3(this.viewWidth/this.terrain.sizex*(this.terrain.sizex/2-pos.x), this.terrain.height[this.terrain.sizey*(this.terrain.sizex-1-pos.y) + (this.terrain.sizex-1-pos.x)]*this.heightStretch, this.viewDepth/this.terrain.sizey*(this.terrain.sizey/2-pos.y));
+  }
+
+  private getMapPosition(x:number, y:number):MapPosition {
+	  return new MapPosition({x:Math.round(this.terrain.sizex/2-x*this.terrain.sizex/this.viewWidth), y:Math.round(this.terrain.sizey/2-y*this.terrain.sizey/this.viewDepth)});
+  }
+
 }

@@ -8,6 +8,7 @@ import 'rxjs/add/operator/publish';
 import 'rxjs/add/observable/forkJoin';
 import {AppComponent} from './app.component';
 import {TerrainService} from "./store/terrain.service";
+import {ArmyService} from "./store/army.service";
 import {Action} from './state/app.action';
 import {initialAppState} from './state/app.state';
 import {applicationStateFactory} from "./state/app.state-factory";
@@ -15,6 +16,7 @@ import {initialState, dispatcher, state} from './state/tokens';
 
 bootstrap(AppComponent, [
   TerrainService,
+  ArmyService,
   HTTP_PROVIDERS,
   provide(initialState, {useValue: initialAppState}),
   provide(dispatcher, {useValue: new Subject<Action>()}),

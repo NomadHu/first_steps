@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response  } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { Terrain } from '../model/terrain';
-import { TerrainTexture } from '../model/terrain-texture';
-import { ColorCode } from '../model/color-code';
+import { Terrain, TerrainTexture, ColorCode} from '../state/terrain/terrain-state';
 import { TerrainTextureType } from '../state/ui/ui-state';
-
-
 
 @Injectable()
 export class TerrainService {
@@ -23,8 +19,8 @@ export class TerrainService {
         this.getTerrain(),
         this._http.get('/testdata/terrain-texture-'+id+'.json')
       ).map(res => {
-        let terrain = <Terrain>res[0];
-        let terrainTexture = this.convertToTerrainTexture(<Response>res[1],terrain);
+        let terrain:Terrain = <Terrain>res[0];
+        let terrainTexture:TerrainTexture = this.convertToTerrainTexture(<Response>res[1],terrain);
         return [terrain, terrainTexture];
        })
        .catch(this.handleError);
